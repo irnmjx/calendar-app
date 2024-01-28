@@ -30,15 +30,22 @@ function renderCalendar() {
   let datesHtml = "";
 
   for (let i = start; i > 0; i--) {
-    datesHtml = `<li class='inactive'>${endDatePrev - i + 1}</li>`;
+    datesHtml += `<li class='inactive'>${endDatePrev - i + 1}</li>`;
   }
 
   for (let i = 1; i <= endDate; i++) {
-    datesHtml += `<li>${i}</li>`;
+    let className =
+      i === date.getDate() &&
+      month === new Date().getMonth() &&
+      year === new Date().getFullYear()
+        ? ' class="today"'
+        : "";
+
+    datesHtml += `<li${className}>${i}</li$>`;
   }
 
-  for (let i = 1; i <= 6 - end; i++) {
-    datesHtml += `<li class='inactive'>${i}</li>`;
+  for (let i = end; i < 6; i++) {
+    datesHtml += `<li class='inactive'>${i - end + 1}</li>`;
   }
 
   dates.innerHTML = datesHtml;
